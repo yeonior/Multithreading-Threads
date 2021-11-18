@@ -15,6 +15,8 @@
 		A21B24422743BAD6001E9A4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21B24402743BAD6001E9A4E /* LaunchScreen.storyboard */; };
 		A21B24522743BB87001E9A4E /* Bread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21B24512743BB87001E9A4E /* Bread.swift */; };
 		A230D44827457D4F0065FF15 /* Basket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A230D44727457D4F0065FF15 /* Basket.swift */; };
+		A281D1072746CA0000F3B16D /* ProducerThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281D1062746CA0000F3B16D /* ProducerThread.swift */; };
+		A281D1092746CA1F00F3B16D /* WorkerThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281D1082746CA1F00F3B16D /* WorkerThread.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		A21B24432743BAD6001E9A4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A21B24512743BB87001E9A4E /* Bread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bread.swift; sourceTree = "<group>"; };
 		A230D44727457D4F0065FF15 /* Basket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basket.swift; sourceTree = "<group>"; };
+		A281D1062746CA0000F3B16D /* ProducerThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerThread.swift; sourceTree = "<group>"; };
+		A281D1082746CA1F00F3B16D /* WorkerThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerThread.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				A21B24372743BAD4001E9A4E /* SceneDelegate.swift */,
 				A21B24512743BB87001E9A4E /* Bread.swift */,
 				A230D44727457D4F0065FF15 /* Basket.swift */,
+				A281D1062746CA0000F3B16D /* ProducerThread.swift */,
+				A281D1082746CA1F00F3B16D /* WorkerThread.swift */,
 				A21B24392743BAD4001E9A4E /* ViewController.swift */,
 				A21B243B2743BAD4001E9A4E /* Main.storyboard */,
 				A21B243E2743BAD6001E9A4E /* Assets.xcassets */,
@@ -145,7 +151,9 @@
 			files = (
 				A21B243A2743BAD4001E9A4E /* ViewController.swift in Sources */,
 				A21B24362743BAD4001E9A4E /* AppDelegate.swift in Sources */,
+				A281D1092746CA1F00F3B16D /* WorkerThread.swift in Sources */,
 				A21B24382743BAD4001E9A4E /* SceneDelegate.swift in Sources */,
+				A281D1072746CA0000F3B16D /* ProducerThread.swift in Sources */,
 				A21B24522743BB87001E9A4E /* Bread.swift in Sources */,
 				A230D44827457D4F0065FF15 /* Basket.swift in Sources */,
 			);
