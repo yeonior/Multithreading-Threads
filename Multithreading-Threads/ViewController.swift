@@ -8,9 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let bakery = Bakery()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bakery.startBaking()
     }
 }
