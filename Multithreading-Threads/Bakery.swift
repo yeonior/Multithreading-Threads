@@ -26,7 +26,26 @@ final class Bakery {
     }
     
     @objc func workerThreadAction() {
-        
+        var needToBake = 10
+        while needToBake > 0 {
+            conditionVar.lock()
+            
+            while !isFinished {
+                conditionVar.wait()
+            }
+
+            if breadBasket.array.count > 0 {
+                let bread = breadBasket.take()
+                bread.bake()
+                print("Took a \(bread.breadType) bread")
+                print("Basket: \(breadBasket.array.count)\n")
+                needToBake -= 1
+            } else if breadBasket.array.count == 0 {
+                conditionVar.wait()
+            }
+            conditionVar.unlock()
+        }
+        print("WORKER THREAD IS DONE!\n")
     }
     
     @objc func producerThreadAction() {
