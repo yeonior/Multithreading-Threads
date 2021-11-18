@@ -49,6 +49,26 @@ final class Bakery {
     }
     
     @objc func producerThreadAction() {
-        
+        var needToMake = 10
+        let timer = Timer(timeInterval: 0.1, repeats: true) { timer in
+            if needToMake != 0 {
+                self.isFinished = false
+                self.conditionVar.lock()
+                
+                let bread = Bread.make()
+                self.breadBasket.put(bread)
+                needToMake -= 1
+                print("Put a \(bread.breadType) bread")
+                print("Basket: \(self.breadBasket.array.count)\n")
+                
+                self.isFinished = true
+                self.conditionVar.signal()
+                self.conditionVar.unlock()
+            } else {
+                print("PRODUCER THREAD IS DONE!\n")
+                timer.invalidate()
+            }
+        }
+        RunLoop.main.add(timer, forMode: .common)
     }
 }
