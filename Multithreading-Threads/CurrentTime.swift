@@ -15,6 +15,7 @@ final class CurrentTime {
         let minute = calendar.component(.minute, from: date)
         let second = calendar.component(.second, from: date)
         let nanosecond = calendar.component(.nanosecond, from: date)
-        return "\(hour):\(minute):\(second):\(nanosecond)"
+        let roundedNanosecond = Int(round(Double(nanosecond / 1_000_000)))
+        return "\(hour):\(minute):\(second):\(roundedNanosecond)"
     }
 }

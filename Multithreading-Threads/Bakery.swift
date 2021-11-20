@@ -5,6 +5,22 @@
 //  Created by ruslan on 18.11.2021.
 //
 
+// Необходимо создать два сабкласса Thread. Один из них будет порождающим потоком, а второй рабочим.
+// Порождающий поток должен каждые 2 секунды создавать новый экземпляр структуры Bread используя метод make()
+// Созданный экземпляр он должен положить в хранилище, работающее по принципу LIFO.
+// (хранилище нужно создать самостоятельно)
+// Выполнение порождающего потока должно длиться 20 секунд.
+// Хранилище для "хлеба" должно быть потокобезопасно.
+// Рабочий поток должен ожидать появления экземпляров структуры Bread в хранилище.
+// При его появлении рабочий поток забирает один "хлеб" из хранилища и вызывает метод bake().
+// Также он поступает и с другими экземплярами если они есть в хранилище.
+// Если нет, то снова приостанавливается в ожидании.
+// Во время того, как рабочий поток "печет хлеб" порождающий поток продолжает выполнение и
+// при срабатывании таймера должен также положить новую сущность Bread в хранилище.
+// После окончания выполнения порождающего потока рабочий поток обрабатывает экземпляры Bread,
+// оставшиеся в хранилище, и тоже заканчивает свое выполнение.
+// Добавьте также в плейграунд код, создающий экземпляры этих потоков и запускающий их выполнение.
+
 import Foundation
 
 final class Bakery {
@@ -32,18 +48,18 @@ final class Bakery {
             
             while !isFinished {
                 conditionVar.wait()
-                print("WAITING...")
+                print("WAITING...\n")
             }
 
             if breadBasket.array.count > 0 {
                 let bread = breadBasket.take()
                 bread.bake()
-                print("Took a \(bread.breadType) bread")
+                print("TOOK a \(bread.breadType) bread")
                 print("Basket: \(breadBasket.array.count)\n")
                 needToBake -= 1
             } else if breadBasket.array.count == 0 {
                 conditionVar.wait()
-                print("WAITING...")
+                print("WAITING...\n")
             }
             conditionVar.unlock()
         }
@@ -54,18 +70,16 @@ final class Bakery {
         var needToMake = 10
         let timer = Timer(timeInterval: 2.0, repeats: true) { timer in
             if needToMake != 0 {
-                self.isFinished = false
-                self.conditionVar.lock()
                 
                 let bread = Bread.make()
                 self.breadBasket.put(bread)
                 needToMake -= 1
-                print("Put a \(bread.breadType) bread at \(CurrentTime.currentTime())")
+                print("PUT a \(bread.breadType) bread at \(CurrentTime.currentTime())")
                 print("Basket: \(self.breadBasket.array.count)\n")
                 
                 self.isFinished = true
                 self.conditionVar.signal()
-                self.conditionVar.unlock()
+                print("SIGNAL\n")
             } else {
                 
                 print("PRODUCER THREAD IS DONE!\n")
