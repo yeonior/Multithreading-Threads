@@ -18,6 +18,7 @@
 		A281D1072746CA0000F3B16D /* ProducerThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281D1062746CA0000F3B16D /* ProducerThread.swift */; };
 		A281D1092746CA1F00F3B16D /* WorkerThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281D1082746CA1F00F3B16D /* WorkerThread.swift */; };
 		A281D10B2746CA7500F3B16D /* Bakery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281D10A2746CA7500F3B16D /* Bakery.swift */; };
+		A28373502749436E0059CD3D /* CurrentTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = A283734F2749436E0059CD3D /* CurrentTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A281D1062746CA0000F3B16D /* ProducerThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProducerThread.swift; sourceTree = "<group>"; };
 		A281D1082746CA1F00F3B16D /* WorkerThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerThread.swift; sourceTree = "<group>"; };
 		A281D10A2746CA7500F3B16D /* Bakery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bakery.swift; sourceTree = "<group>"; };
+		A283734F2749436E0059CD3D /* CurrentTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				A21B24512743BB87001E9A4E /* Bread.swift */,
 				A230D44727457D4F0065FF15 /* Basket.swift */,
 				A281D10A2746CA7500F3B16D /* Bakery.swift */,
+				A283734F2749436E0059CD3D /* CurrentTime.swift */,
 				A281D1082746CA1F00F3B16D /* WorkerThread.swift */,
 				A281D1062746CA0000F3B16D /* ProducerThread.swift */,
 				A21B24392743BAD4001E9A4E /* ViewController.swift */,
@@ -155,6 +158,7 @@
 				A21B243A2743BAD4001E9A4E /* ViewController.swift in Sources */,
 				A21B24362743BAD4001E9A4E /* AppDelegate.swift in Sources */,
 				A281D1092746CA1F00F3B16D /* WorkerThread.swift in Sources */,
+				A28373502749436E0059CD3D /* CurrentTime.swift in Sources */,
 				A21B24382743BAD4001E9A4E /* SceneDelegate.swift in Sources */,
 				A281D1072746CA0000F3B16D /* ProducerThread.swift in Sources */,
 				A281D10B2746CA7500F3B16D /* Bakery.swift in Sources */,

@@ -20,7 +20,7 @@ final class Basket {
     
     func take() -> Bread {
         guard array.isEmpty == false else { fatalError("Busket is empty!") }
-        mutex.lock(); defer { mutex.unlock() }
+//        mutex.lock(); defer { mutex.unlock() }
         let lastObject = array.removeLast()
         
         return lastObject

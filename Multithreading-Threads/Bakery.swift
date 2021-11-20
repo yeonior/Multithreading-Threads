@@ -9,11 +9,11 @@ import Foundation
 
 final class Bakery {
     
-    var breadBasket = Basket()
-    let conditionVar = NSCondition()
-    var isFinished = false
-    var workerThread = WorkerThread()
-    var producerThread = ProducerThread()
+    private(set) var breadBasket = Basket()
+    private let conditionVar = NSCondition()
+    private var isFinished = false
+    private var workerThread = WorkerThread()
+    private var producerThread = ProducerThread()
     
     init() {
         workerThread = WorkerThread(target: self, selector: #selector(workerThreadAction), object: nil)
@@ -32,6 +32,7 @@ final class Bakery {
             
             while !isFinished {
                 conditionVar.wait()
+                print("WAITING...")
             }
 
             if breadBasket.array.count > 0 {
@@ -42,6 +43,7 @@ final class Bakery {
                 needToBake -= 1
             } else if breadBasket.array.count == 0 {
                 conditionVar.wait()
+                print("WAITING...")
             }
             conditionVar.unlock()
         }
@@ -50,7 +52,7 @@ final class Bakery {
     
     @objc func producerThreadAction() {
         var needToMake = 10
-        let timer = Timer(timeInterval: 0.1, repeats: true) { timer in
+        let timer = Timer(timeInterval: 2.0, repeats: true) { timer in
             if needToMake != 0 {
                 self.isFinished = false
                 self.conditionVar.lock()
@@ -58,13 +60,14 @@ final class Bakery {
                 let bread = Bread.make()
                 self.breadBasket.put(bread)
                 needToMake -= 1
-                print("Put a \(bread.breadType) bread")
+                print("Put a \(bread.breadType) bread at \(CurrentTime.currentTime())")
                 print("Basket: \(self.breadBasket.array.count)\n")
                 
                 self.isFinished = true
                 self.conditionVar.signal()
                 self.conditionVar.unlock()
             } else {
+                
                 print("PRODUCER THREAD IS DONE!\n")
                 timer.invalidate()
             }
