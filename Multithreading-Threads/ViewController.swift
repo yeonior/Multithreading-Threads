@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let bakery = Bakery()
+    let bakery = Bakery(breads: 10)
 
     override func viewDidLoad() {
         super.viewDidLoad()

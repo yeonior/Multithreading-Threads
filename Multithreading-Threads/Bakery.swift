@@ -25,50 +25,60 @@ import Foundation
 
 final class Bakery {
     
-    private(set) var breadBasket = Basket()
+    private var breadBasket = Basket()
+    private var breads = 0
     private let conditionVar = NSCondition()
-    private var isFinished = false
     private var workerThread = WorkerThread()
     private var producerThread = ProducerThread()
+    private var breadIsMade = false
+    private var threadsAreDone = false {
+        didSet {
+            workerThread.cancel()
+            producerThread.cancel()
+            print("THREADS ARE DONE!!!")
+        }
+    }
     
-    init() {
+    init(breads: Int) {
+        self.breads = breads
         workerThread = WorkerThread(target: self, selector: #selector(workerThreadAction), object: nil)
         producerThread = ProducerThread(target: self, selector: #selector(producerThreadAction), object: nil)
     }
     
-    func startBaking() {
+    public func startBaking() {
         workerThread.start()
         producerThread.start()
     }
     
-    @objc func workerThreadAction() {
-        var needToBake = 10
-        while needToBake > 0 {
+    @objc private func workerThreadAction() {
+        var needToBake = breads
+        while needToBake != 0 {
             conditionVar.lock()
             
-            while !isFinished {
-                conditionVar.wait()
+            while !breadIsMade {
                 print("WAITING...\n")
+                conditionVar.wait()
             }
 
             if breadBasket.array.count > 0 {
                 let bread = breadBasket.take()
-                bread.bake()
                 print("TOOK a \(bread.breadType) bread")
                 print("Basket: \(breadBasket.array.count)\n")
+                bread.bake()
                 needToBake -= 1
             } else if breadBasket.array.count == 0 {
-                conditionVar.wait()
                 print("WAITING...\n")
+                conditionVar.wait()
             }
             conditionVar.unlock()
         }
         print("WORKER THREAD IS DONE!\n")
+        threadsAreDone = true
     }
     
-    @objc func producerThreadAction() {
-        var needToMake = 10
-        let timer = Timer(timeInterval: 2.0, repeats: true) { timer in
+    @objc private func producerThreadAction() {
+        var needToMake = breads
+        let timer = Timer(timeInterval: 0.01, repeats: true) { timer in
             if needToMake != 0 {
                 
                 let bread = Bread.make()
@@ -77,11 +87,9 @@ final class Bakery {
                 print("PUT a \(bread.breadType) bread at \(CurrentTime.currentTime())")
                 print("Basket: \(self.breadBasket.array.count)\n")
                 
-                self.isFinished = true
+                self.breadIsMade = true
                 self.conditionVar.signal()
-                print("SIGNAL\n")
             } else {
-                
                 print("PRODUCER THREAD IS DONE!\n")
                 timer.invalidate()
             }
